@@ -160,6 +160,19 @@ for i in range(0,len(pre)):
 		PREout+="|]"
 print(PREout)
 
+W = "["
+for j in range(0,n):
+	W+="|"
+	for t in range(0,len(DT)):
+		aux = float(DT[t])*int(pro[j])
+		W += str(aux)
+		if t <(len(DT)-1):
+			W+=","
+
+W += "|]"
+
+print(W)
+
 
 
 
@@ -175,6 +188,7 @@ tf.write("tmax =" + str(t)+"\n")
 tf.write("delta = " + str(delta)+"\n")
 tf.write("deltaT =" + DTout+"\n")
 tf.write("pre =" + PREout+"\n")
+tf.write("W ="+W+"\n")
 
 
 
