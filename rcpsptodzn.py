@@ -1,12 +1,14 @@
 import pandas as pd
 
+#Se cambia el formato de los archivos con datos .rcpsp usados para el modelo con CPLEX 
+
 
 # Input
 data_file = "AB4c1.txt"
 
 # Delimiter
 data_file_delimiter = ' '
-
+import numpy as np
 # The max column count a line in the file could have
 largest_column_count = 0
 
@@ -32,6 +34,153 @@ column_names = [i for i in range(0, largest_column_count)]
 df = pd.read_csv(data_file, header=None, delimiter=data_file_delimiter, names=column_names)
 # print(df)
 
-print(df)
+df.fillna('-',inplace=True)
 
-df.to_csv()
+#cantidad de trabajos
+
+n = int(df[0][0])
+
+#Numero de recursos
+
+m = int(df[1][0])
+
+#Cantidad limite de recursos
+
+L = []
+
+i = 0
+while i >=0:
+	if df[i][1]=="-":
+		break
+	else:
+		L.append(int(df[i][1]))
+		i+=1
+print("m=",m)
+#generamos cuanto usa de cada recurso
+rec = np.zeros((m,n))
+
+for i in range(0,m):
+	for j in range(3,n):
+		rec[i,j] = int(df[7+i][j])
+		#print(a[i,j])
+
+#La duracion de cada job
+
+dur = np.zeros(n)
+for i in range(3,n):
+	dur[i] = int(df[1][i])
+
+#Sacamos el profit
+
+pro = np.zeros(n)
+for i in range(3,n):
+	pro[i] = float(df[6][i])
+
+
+print(pro)
+
+#Sacamos cantidad de precedencias de cada trabajo
+
+cpre = np.zeros(n)
+for i in range(3,n):
+	cpre[i] = int(df[7+m][i])
+
+#Calculamos la cantidad total de precedencias
+
+l = cpre.sum()
+
+print(l)
+
+#Obtenemos el tiempo maximo
+
+t = int(df[3][0])
+
+#Calculamos tasa de descuento
+
+delta = float(df[2][0])
+
+#Vector de tasas de descuento
+
+DT = []
+for i in range(0,t):
+	DT.append(np.exp(-i*delta))
+
+#Obtenemos los precedentes
+
+pre = []
+for i in range(3,n):
+	for k in range(0,int(cpre[i])):
+		predecesor = int(df[7+m+2*k][i])
+		pre.append([predecesor,i])
+print(pre)
+
+
+#Adaptamos los vectores al formato de salida
+
+#Cantidad de recursos
+Lout = "["
+for i in range(0,len(L)):
+	Lout += str(L[i])
+	if i!=(len(L)-1):
+		Lout+=","
+	else:
+		Lout+="]"
+print(Lout)
+
+#Profit
+PROout = "["
+for i in range(0,len(pro)):
+	PROout += str(pro[i])
+	if i!=(len(pro)-1):
+		PROout+=","
+	else:
+		PROout+="]"
+print(PROout)
+
+#Delta t 
+
+DTout = "["
+for i in range(0,len(DT)):
+	DTout += str(DT[i])
+	if i!=(len(DT)-1):
+		DTout+=","
+	else:
+		DTout+="]"
+print(DTout)
+
+#predecesores 
+
+PREout = "[|"
+for i in range(0,len(pre)):
+	np = pre[i]
+	PREout += str(np[0])+","+str(np[1])
+	if i!=(len(pre)-1):
+		PREout+="|"
+	else:
+		PREout+="|]"
+print(PREout)
+
+
+
+
+#Ya que tenemos los datos los adaptamos al modelo de dato de MinZinc
+
+tf = open("Output.txt","w")
+tf.write("n = " + str(n)+"\n")
+tf.write("m = " + str(m)+"\n")
+tf.write("L =" + Lout+"\n")
+tf.write("l =" + str(l)+"\n")
+tf.write("pro =" +PROout+"\n")
+tf.write("tmax =" + str(t)+"\n")
+tf.write("delta = " + str(delta)+"\n")
+tf.write("deltaT =" + DTout+"\n")
+tf.write("pre =" + PREout+"\n")
+
+
+
+
+
+#Calculamos la cantidad de precedencias
+#print(df[9][3:].to_numeric().sum())
+#prec = df[9][:3]
+
