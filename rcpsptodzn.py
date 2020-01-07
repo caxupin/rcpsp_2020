@@ -196,10 +196,7 @@ for i in range(0,len(rec[:,0])):
 #print(RECout)
 
 W = "["
-<<<<<<< HEAD
-=======
 Wp=[]
->>>>>>> e3b2b86c6d8d42a37a3674479fd1420df0b67ff0
 for j in range(0,n):
 	W+="|"
 	for q in range(0,len(DT)):
@@ -211,15 +208,10 @@ for j in range(0,n):
 
 W += "|]"
 
-<<<<<<< HEAD
-
-print(len(DT))
-=======
 print(len(Wp))
 
 
 print("pre: ",len(pre))
->>>>>>> e3b2b86c6d8d42a37a3674479fd1420df0b67ff0
 print("duraciones ",len(dur))
 print("cprec ", len(cpre))
 print("profits ", len(pro))
