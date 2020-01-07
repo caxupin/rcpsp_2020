@@ -94,6 +94,7 @@ for i in range(3,n):
 #Calculamos la cantidad total de precedencias
 
 l = cpre.sum()
+l = int(l)	
 
 print(l)
 
@@ -173,7 +174,7 @@ for i in range(0,len(dur)):
 	np = dur[i]
 	DURout += str(int(np))
 	if i==(len(dur)-1):
-		DURout+="]"
+		DURout+="|]"
 	else:
 		DURout+= ","
 	
@@ -212,19 +213,19 @@ print(W)
 
 #Ya que tenemos los datos los adaptamos al modelo de dato de MinZinc
 
-tf = open("Output.txt","w")
-tf.write("n = " + str(n)+"\n")
-tf.write("m = " + str(m)+"\n")
-tf.write("L =" + Lout+"\n")
-tf.write("l =" + str(l)+"\n")
-tf.write("pro =" +PROout+"\n")
-tf.write("dur =" +DURout+"\n")
-tf.write("rec =" +RECout+"\n")
-tf.write("tmax =" + str(t)+"\n")
-tf.write("delta = " + str(delta)+"\n")
-tf.write("deltaT =" + DTout+"\n")
-tf.write("pre =" + PREout+"\n")
-tf.write("W ="+W+"\n")
+tf = open("Input.dzn","w")
+tf.write("n = " + str(n)+";"+"\n")
+tf.write("m = " + str(m)+";"+"\n")
+tf.write("L =" + Lout+";"+"\n")
+tf.write("l =" + str(l)+";"+"\n")
+tf.write("prof =" +PROout+";"+"\n")
+tf.write("d =" +DURout+";"+"\n")
+tf.write("res =" +RECout+";"+"\n")
+tf.write("maxt =" + str(t)+";"+"\n")
+tf.write("dr = " + str(delta)+";"+"\n")
+tf.write("deltaT =" + DTout+";"+"\n")
+tf.write("prec =" + PREout+";"+"\n")
+tf.write("W ="+W+";"+"\n")
 
 
 

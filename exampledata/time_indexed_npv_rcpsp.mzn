@@ -7,6 +7,8 @@ set of int: RESOURCE = 1..m;
 array[RESOURCE] of int: L; % resource limit
 array[RESOURCE,TASK] of int: res; % usage
 
+array[TASK,TIME] of float: W;
+
 int: l; % number of precedences
 set of int: PREC = 1..l;
 array[PREC,1..2] of TASK: pre; % predecessor/successor pairs
@@ -15,7 +17,7 @@ int: maxt; % maximum time
 set of int: TIME = 0..maxt;
 %---------Variation to NPV maximization-----------------------
 
-array[TASK] of int: prof; %PROFIT
+array[TASK] of float: prof; %PROFIT
 float: dr; %DISCOUNT RATE
 array[TASK, TIME] of var bool: x; %binary
 
@@ -33,9 +35,9 @@ constraint forall(p in PREC) (
 constraint forall(k in RESOURCE) (
                  forall(t in TIME) 
                        (sum(j in TASK)(res[j, k]*(sum(s in t-d[j]+1..t)(x[j,s])))<=RESOURCE[k])
-                       ) 
+                       ); 
                  
                  
-solve maximize sum (j in TASK) (sum(t in TIME) (w[j,t]*x[j,t]));
+solve maximize sum (j in TASK) (sum(t in TIME) (W[j,t]*x[j,t]));
 
 output [show(x)];
