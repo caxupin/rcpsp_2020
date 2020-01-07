@@ -119,8 +119,7 @@ pre = []
 for i in range(3,n+3):
 	for k in range(0,int(cpre[i-3])):
 		predecesor = int(df[7+m+2*k][i])
-		pre.append([predecesor,i])
-#print(pre)
+		pre.append([predecesor+1,i+1])
 
 
 #Adaptamos los vectores al formato de salida
@@ -197,18 +196,30 @@ for i in range(0,len(rec[:,0])):
 #print(RECout)
 
 W = "["
+<<<<<<< HEAD
+=======
+Wp=[]
+>>>>>>> e3b2b86c6d8d42a37a3674479fd1420df0b67ff0
 for j in range(0,n):
 	W+="|"
-	for t in range(0,len(DT)):
-		aux = float(DT[t])*int(pro[j])
+	for q in range(0,len(DT)):
+		aux = float(DT[q])*int(pro[j])
 		W += str(aux)
-		if t <(len(DT)-1):
+		Wp.append(aux)
+		if q <(len(DT)-1):
 			W+=","
 
 W += "|]"
 
+<<<<<<< HEAD
 
 print(len(DT))
+=======
+print(len(Wp))
+
+
+print("pre: ",len(pre))
+>>>>>>> e3b2b86c6d8d42a37a3674479fd1420df0b67ff0
 print("duraciones ",len(dur))
 print("cprec ", len(cpre))
 print("profits ", len(pro))
