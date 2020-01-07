@@ -159,7 +159,7 @@ print(DTout)
 PREout = "[|"
 for i in range(0,len(pre)):
 	np = pre[i]
-	PREout += str(np[0])+","+str(np[1])
+	PREout += str(np[0])+","+str(int(np[1]))
 	if i!=(len(pre)-1):
 		PREout+="|"
 	else:
@@ -171,7 +171,7 @@ print(PREout)
 DURout = "[|"
 for i in range(0,len(dur)):
 	np = dur[i]
-	DURout += str(np)
+	DURout += str(int(np))
 	if i==(len(dur)-1):
 		DURout+="]"
 	else:
@@ -184,7 +184,7 @@ print(DURout)
 RECout = "[|"
 for i in range(0,len(rec[:,0])):
 	for j in range(0,len(rec[0,:])):
-		np = rec[i,j]
+		np = int(rec[i,j])
 		RECout += str(np)
 		if j != (len(rec[0,:])-1):
 			RECout+=","
