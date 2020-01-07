@@ -169,12 +169,12 @@ print(PREout)
 
 #duracion
 
-DURout = "[|"
+DURout = "["
 for i in range(0,len(dur)):
 	np = dur[i]
 	DURout += str(int(np))
 	if i==(len(dur)-1):
-		DURout+="|]"
+		DURout+="]"
 	else:
 		DURout+= ","
 	
@@ -223,8 +223,7 @@ tf.write("d =" +DURout+";"+"\n")
 tf.write("res =" +RECout+";"+"\n")
 tf.write("maxt =" + str(t)+";"+"\n")
 tf.write("dr = " + str(delta)+";"+"\n")
-tf.write("deltaT =" + DTout+";"+"\n")
-tf.write("prec =" + PREout+";"+"\n")
+tf.write("pre =" + PREout+";"+"\n")
 tf.write("W ="+W+";"+"\n")
 
 
