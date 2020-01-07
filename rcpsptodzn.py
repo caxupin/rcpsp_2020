@@ -66,29 +66,30 @@ print("m=",m)
 rec = np.zeros((m,n))
 
 for i in range(0,m):
-	for j in range(3,n):
-		rec[i,j] = int(df[7+i][j])
+	for j in range(3,n+3):
+		rec[i,j-3] = int(df[7+i][j])
 		#print(a[i,j])
 
 #La duracion de cada job
 
-dur = np.zeros(n-3)
-for i in range(3,n):
+dur = np.zeros(n)
+for i in range(3,n+3):
 	dur[i-3] = int(df[1][i])
 
 #Sacamos el profit
 
-pro = np.zeros(n-3)
-for i in range(3,n):
+pro = np.zeros(n)
+for i in range(3,n+3):
 	pro[i-3] = float(df[6][i])
 
 
 print(pro)
+print("cantidad de profifts: ",len(pro))
 
 #Sacamos cantidad de precedencias de cada trabajo
 
-cpre = np.zeros(n-3)
-for i in range(3,n):
+cpre = np.zeros(n)
+for i in range(3,n+3):
 	cpre[i-3] = int(df[7+m][i])
 
 #Calculamos la cantidad total de precedencias
@@ -115,7 +116,7 @@ for i in range(0,t):
 #Obtenemos los precedentes
 
 pre = []
-for i in range(3,n):
+for i in range(3,n+3):
 	for k in range(0,int(cpre[i-3])):
 		predecesor = int(df[7+m+2*k][i])
 		pre.append([predecesor,i])
@@ -206,11 +207,13 @@ for j in range(0,n-3):
 
 W += "|]"
 
-print(W)
+#print(W)
 
 
 
-
+print("duraciones ",len(dur))
+print("cprec ", len(cpre))
+print("profits ", len(pro))
 #Ya que tenemos los datos los adaptamos al modelo de dato de MinZinc
 
 tf = open("Input.dzn","w")
