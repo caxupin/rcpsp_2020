@@ -2,6 +2,12 @@ import pandas as pd
 
 #Se cambia el formato de los archivos con datos .rcpsp usados para el modelo con CPLEX 
 
+'''
+SOBRE ARCHIVO DE ENTRADA:
+
+Se usa como base los datos en dormato .rcpsp pero separados solo por un espacio cada cadto (para obtener eso se puede 
+usar un editor de texto y reemplazar los espaciados mayores por un espaciado simple " ".)
+'''
 
 # Input
 data_file = "AB4c1.txt"
@@ -160,6 +166,34 @@ for i in range(0,len(pre)):
 		PREout+="|]"
 print(PREout)
 
+#duracion
+
+DURout = "[|"
+for i in range(0,len(dur)):
+	np = dur[i]
+	DURout += str(np)
+	if i==(len(dur)-1):
+		DURout+="]"
+	else:
+		DURout+= ","
+	
+print(DURout)
+
+#Cantidad de recursos que usa cada trabajo
+
+RECout = "[|"
+for i in range(0,len(rec[:,0])):
+	for j in range(0,len(rec[0,:])):
+		np = rec[i,j]
+		RECout += str(np)
+		if j != (len(rec[0,:])-1):
+			RECout+=","
+	if i!=(len(rec[:,0])-1):
+		RECout+="|"
+	else:
+		RECout+="|]"
+print(RECout)
+
 W = "["
 for j in range(0,n):
 	W+="|"
@@ -184,6 +218,7 @@ tf.write("m = " + str(m)+"\n")
 tf.write("L =" + Lout+"\n")
 tf.write("l =" + str(l)+"\n")
 tf.write("pro =" +PROout+"\n")
+tf.write("dur =" +DURout+"\n")
 tf.write("tmax =" + str(t)+"\n")
 tf.write("delta = " + str(delta)+"\n")
 tf.write("deltaT =" + DTout+"\n")
