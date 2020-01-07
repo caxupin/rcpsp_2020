@@ -1,20 +1,23 @@
 int: n; % number of tasks
+int: maxt; % maximum time
 set of int: TASK = 1..n;
+set of int: TASK2 = 0..n-1;
 array[TASK] of int: d; % duration
 
 int: m; % number of resources
 set of int: RESOURCE = 1..m;
 array[RESOURCE] of int: L; % resource limit
 array[RESOURCE,TASK] of int: res; % usage
-
-array[TASK,TIME] of float: W;
+set of int: TIME = 0..maxt;
+set of int: TIME1 = 1..maxt+1; % q wea xd
+array[TASK,TIME1] of float: W;
 
 int: l; % number of precedences
 set of int: PREC = 1..l;
 array[PREC,1..2] of TASK: pre; % predecessor/successor pairs
 
-int: maxt; % maximum time
-set of int: TIME = 0..maxt;
+
+
 %---------Variation to NPV maximization-----------------------
 
 array[TASK] of float: prof; %PROFIT

@@ -110,7 +110,7 @@ delta = float(df[2][0])
 #Vector de tasas de descuento
 
 DT = []
-for i in range(0,t):
+for i in range(0,t+1):
 	DT.append(np.exp(-i*delta))
 
 #Obtenemos los precedentes
@@ -197,7 +197,7 @@ for i in range(0,len(rec[:,0])):
 #print(RECout)
 
 W = "["
-for j in range(0,n-3):
+for j in range(0,n):
 	W+="|"
 	for t in range(0,len(DT)):
 		aux = float(DT[t])*int(pro[j])
@@ -207,10 +207,8 @@ for j in range(0,n-3):
 
 W += "|]"
 
-#print(W)
 
-
-
+print(len(DT))
 print("duraciones ",len(dur))
 print("cprec ", len(cpre))
 print("profits ", len(pro))
