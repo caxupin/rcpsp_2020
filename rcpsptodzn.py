@@ -38,7 +38,7 @@ column_names = [i for i in range(0, largest_column_count)]
 
 # Read csv
 df = pd.read_csv(data_file, header=None, delimiter=data_file_delimiter, names=column_names)
-# print(df)
+print(df)
 
 df.fillna('-',inplace=True)
 
@@ -72,31 +72,31 @@ for i in range(0,m):
 
 #La duracion de cada job
 
-dur = np.zeros(n)
+dur = np.zeros(n-3)
 for i in range(3,n):
-	dur[i] = int(df[1][i])
+	dur[i-3] = int(df[1][i])
 
 #Sacamos el profit
 
-pro = np.zeros(n)
+pro = np.zeros(n-3)
 for i in range(3,n):
-	pro[i] = float(df[6][i])
+	pro[i-3] = float(df[6][i])
 
 
 print(pro)
 
 #Sacamos cantidad de precedencias de cada trabajo
 
-cpre = np.zeros(n)
+cpre = np.zeros(n-3)
 for i in range(3,n):
-	cpre[i] = int(df[7+m][i])
+	cpre[i-3] = int(df[7+m][i])
 
 #Calculamos la cantidad total de precedencias
 
 l = cpre.sum()
 l = int(l)	
 
-print(l)
+#print(l)
 
 #Obtenemos el tiempo maximo
 
@@ -116,10 +116,10 @@ for i in range(0,t):
 
 pre = []
 for i in range(3,n):
-	for k in range(0,int(cpre[i])):
+	for k in range(0,int(cpre[i-3])):
 		predecesor = int(df[7+m+2*k][i])
 		pre.append([predecesor,i])
-print(pre)
+#print(pre)
 
 
 #Adaptamos los vectores al formato de salida
@@ -132,7 +132,7 @@ for i in range(0,len(L)):
 		Lout+=","
 	else:
 		Lout+="]"
-print(Lout)
+#print(Lout)
 
 #Profit
 PROout = "["
@@ -142,7 +142,7 @@ for i in range(0,len(pro)):
 		PROout+=","
 	else:
 		PROout+="]"
-print(PROout)
+#print(PROout)
 
 #Delta t 
 
@@ -153,7 +153,7 @@ for i in range(0,len(DT)):
 		DTout+=","
 	else:
 		DTout+="]"
-print(DTout)
+#print(DTout)
 
 #predecesores 
 
@@ -165,7 +165,7 @@ for i in range(0,len(pre)):
 		PREout+="|"
 	else:
 		PREout+="|]"
-print(PREout)
+#print(PREout)
 
 #duracion
 
@@ -193,10 +193,10 @@ for i in range(0,len(rec[:,0])):
 		RECout+="|"
 	else:
 		RECout+="|]"
-print(RECout)
+#print(RECout)
 
 W = "["
-for j in range(0,n):
+for j in range(0,n-3):
 	W+="|"
 	for t in range(0,len(DT)):
 		aux = float(DT[t])*int(pro[j])
