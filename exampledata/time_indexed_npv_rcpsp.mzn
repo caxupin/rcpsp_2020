@@ -28,13 +28,15 @@ array[TASK, TIME] of var bool: x; %binary
 constraint forall(j in TASK) (sum (t in TIME) (x[j, t])<=1);  
 % Activity j cannot start before t+p_i if activity i starts at or after t for each (i,j) in PREC    
 constraint forall(p in PREC) (
-                    forall(t in TIME)
-                            (sum(k in t..maxt) (x[pre[p,2],k]) + sum(s in 0..t+d[pre[p,2]]-1) (x[pre[p,1], s])<=1)); 
-                            
+                   forall(t in TIME)
+                          (if (t+d[pre[p,1]]-1<=maxt) then
+                              (sum(k in t..maxt) (x[pre[p,1],k]) + sum(s in 0..t+d[pre[p,1]]-1) (x[pre[p,2], s])<=1) else t==t endif)); 
+                    
+                                                                                  
 % All the simultaneous resource usage must be less or equal than the resource capacity
 constraint forall(k in RESOURCE) (
                  forall(t in TIME) 
-                       (sum(j in TASK)(res[k,j]*(sum(s in t-d[j]+1..t)(x[j,s])))<=L[k])
+                       (sum(j in TASK)(if (t+1>= d[j]) then (res[k,j]*(sum(s in t-d[j]+1..t)(x[j,s]))) else 0 endif) <=L[k])
                        ); 
                  
 % MAXIMIZATION    

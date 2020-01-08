@@ -36,8 +36,8 @@ constraint forall(r in RESOURCE)
 %                              [ res[r,t] | t in TASK where res[r,t] > 0 ]; } in
 %                   cumulative(ss,dd,rr,L[r]));
 
-constraint forall(j in TASK) (v[j]=-dr*s[j]);
-    
-solve maximize sum (j in TASK) (-dr*s[j]*prof[j]);
-
+constraint forall(j in TASK) (v[j]=exp(-dr*s[j]));
+%var float: v=exp(-dr*s[j])*prof[j];
+solve maximize sum (j in TASK) (v[j]*prof[j]);
+%solve maximize v[j];
 output [show(s)];

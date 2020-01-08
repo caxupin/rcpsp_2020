@@ -160,7 +160,7 @@ for i in range(0,len(DT)):
 PREout = "[|"
 for i in range(0,len(pre)):
 	np = pre[i]
-	PREout += str(np[0])+","+str(int(np[1]))
+	PREout += str(np[1])+","+str(int(np[0]))
 	if i!=(len(pre)-1):
 		PREout+="|"
 	else:
