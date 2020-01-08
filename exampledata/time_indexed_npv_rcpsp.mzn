@@ -22,21 +22,32 @@ array[PREC,1..2] of TASK: pre; % predecessor/successor pairs
 array[TASK] of float: prof; %PROFIT
 float: dr; %DISCOUNT RATE
 array[TASK, TIME] of var bool: x; %binary
+array[TASK,TIME] of var bool: y;
 
 %--------------------------------------------------------------
+
+
 % Each activity has exactly one start time
-constraint forall(j in TASK) (sum (t in TIME) (x[j, t])<=1);  
-% Activity j cannot start before t+p_i if activity i starts at or after t for each (i,j) in PREC    
+
+constraint forall(j in TASK) (sum (t in TIME) (x[j, t])<=1); 
+ 
+% Activity j cannot start before t+p_i if activity i starts at or after t for each (i,j) in PREC   
+ 
 constraint forall(p in PREC) (
-                   forall(t in TIME)
-                          (if (t+d[pre[p,1]]-1<=maxt) then
-                              (sum(k in t..maxt) (x[pre[p,1],k]) + sum(s in 0..t+d[pre[p,1]]-1) (x[pre[p,2], s])<=1) else t=t endif)); 
-                    
-                                                                                  
-% All the simultaneous resource usage must be less or equal than the resource capacity
+          sum(t in TIME)(t*(x[pre[p,2],t]-x[pre[p,1],t]))>=d[pre[p,1]]
+);
+
+%restriccion sobre limite de recursos
+
+%constraint forall(k in RESOURCE)
+%            forall(t in TIME)(
+%            sum(j in TASK)(res[k,j]*(y[j,t]-y[j,t+d[j]]))<=L[k])
+%            );
+                                                       
+%All the simultaneous resource usage must be less or equal than the resource capacity
 constraint forall(k in RESOURCE) (
                  forall(t in TIME) 
-                       (sum(j in TASK)(if (t+1>= d[j]) then (res[k,j]*(sum(s in t-d[j]+1..t)(x[j,s]))) else 0 endif) <=L[k])
+                       (sum(j in TASK)(res[k,j]*(sum(s in max(t-d[j]+1,0)..t)(x[j,s])))  <=L[k])
                        ); 
                  
 % MAXIMIZATION    
