@@ -30,7 +30,7 @@ constraint forall(j in TASK) (sum (t in TIME) (x[j, t])<=1);
 constraint forall(p in PREC) (
                    forall(t in TIME)
                           (if (t+d[pre[p,1]]-1<=maxt) then
-                              (sum(k in t..maxt) (x[pre[p,1],k]) + sum(s in 0..t+d[pre[p,1]]-1) (x[pre[p,2], s])<=1) else t==t endif)); 
+                              (sum(k in t..maxt) (x[pre[p,1],k]) + sum(s in 0..t+d[pre[p,1]]-1) (x[pre[p,2], s])<=1) else t=t endif)); 
                     
                                                                                   
 % All the simultaneous resource usage must be less or equal than the resource capacity
@@ -42,4 +42,12 @@ constraint forall(k in RESOURCE) (
 % MAXIMIZATION    
 solve maximize sum (j in TASK) (sum(t in TIME) (W[j,t+1]*x[j,t]));
 
-output [show(x)];
+output ["job 1", "\n", show(x[1,TIME]), "\n"];
+output ["job 2", "\n", show(x[2,TIME]), "\n"];
+
+output ["job 3", "\n", show(x[3,TIME]), "\n"];
+
+output ["job 4", "\n", show(x[4,TIME]), "\n"];
+
+output ["job 5", "\n", show(x[5,TIME]), "\n"];
+
