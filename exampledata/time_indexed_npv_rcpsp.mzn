@@ -29,21 +29,30 @@ array[TASK,TIME] of var bool: y;
 
 % Each activity has exactly one start time
 
-constraint forall(j in TASK) (sum (t in TIME) (x[j, t])<=1); 
+constraint forall(j in TASK) (sum (t in TIME) (x[j, t])<=1);
+%constraint forall(j in TASK) (forall (t in TIME) (sum(s in 0..t)(x[j,s])==y[j, t]));
+
  
 % Activity j cannot start before t+p_i if activity i starts at or after t for each (i,j) in PREC   
  
+%constraint forall(p in PREC) (
+%          forall(t in TIME)(y[pre[p,2],t]<= y[pre[p,1],max(t-d[pre[p,1]],0)])
+%);
+
 constraint forall(p in PREC) (
           sum(t in TIME)(t*(x[pre[p,2],t]-x[pre[p,1],t]))>=d[pre[p,1]]
 );
 
-%restriccion sobre limite de recursos
+% Activity j cannot start before t+p_j if activity i stars at or after t for each (i,j) in PREC    
+%constraint forall(p in PREC) (
+ %                   forall(t in TIME)(sum(k in t..maxt) (x[pre[p,1],k]) + sum(k in 0..min(t+d[pre[p,1]]-1,maxt))(x[pre[p,2],k])<=1));
 
-%constraint forall(k in RESOURCE)
-%            forall(t in TIME)(
-%            sum(j in TASK)(res[k,j]*(y[j,t]-y[j,t+d[j]]))<=L[k])
-%            );
-                                                       
+% Activity j cannot start before t+p_j if activity i stars at or after t for each (i,j) in PREC    
+%constraint forall(p in PREC) (
+ %                   forall(t in TIME)
+  %                          (sum(k in t..maxt) (x[pre[p,1],k]) + sum(k in 0..min(t+d[pre[p,1]]-1,maxt)) (x[pre[p,2], k])<=1));                                                       
+                                                                                                            
+                                                                                                                                                                                                                     
 %All the simultaneous resource usage must be less or equal than the resource capacity
 constraint forall(k in RESOURCE) (
                  forall(t in TIME) 
@@ -61,4 +70,24 @@ output ["job 3", "\n", show(x[3,TIME]), "\n"];
 output ["job 4", "\n", show(x[4,TIME]), "\n"];
 
 output ["job 5", "\n", show(x[5,TIME]), "\n"];
+
+%idea que no funcaron 
+
+% Activity j cannot start before t+p_j if activity i stars at or after t for each (i,j) in PREC    
+%constraint forall(p in PREC) (
+%                    forall(t in TIME)( if (t+d[pre[p,1]]-1<=maxt) then
+%                            (sum(k in t..maxt) (x[pre[p,1],k]) + sum(k in 0..t+d[pre[p,1]]-1)(x[pre[p,2],k])<=1) else %(x[pre[p,1],t]==x[pre[p,1],t]) endif));
+
+%restriccion sobre limite de recursos
+
+%constraint forall(k in RESOURCE)(
+%            forall(t in TIME)(
+%            sum(j in TASK)(res[k,j]*(y[j,t]-y[j,t+d[j]]))<=L[k])
+%            );
+  
+  
+%constraint forall(p in PREC) (
+%          sum(t in TIME)(t*(x[pre[p,2],t]-x[pre[p,1],t]))>=d[pre[p,1]]
+%);
+
 
