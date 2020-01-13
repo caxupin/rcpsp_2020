@@ -119,8 +119,7 @@ pre = []
 for i in range(3,n+3):
 	for k in range(0,int(cpre[i-3])):
 		predecesor = int(df[8+m+2*k][i])
-		if(predecesor<n):				#editao---------------------------
-			pre.append([predecesor+1,i-2])
+		pre.append([predecesor+1,i-2])
 
 
 #Adaptamos los vectores al formato de salida
