@@ -23,6 +23,7 @@ int load_npv( char *fname,
     int *pnresources,
     int ***plhs,
     int **prhs,
+    std::vector<std::vector<int>> &psegper, 
     int **pin_sched,
 	double *pin_ubound)
 {
@@ -40,6 +41,7 @@ int load_npv( char *fname,
     int *rhs = NULL;
     int index = -1;
     int *in_sched = NULL;
+    std::vector<std::vector<int>> psegper;
     int *releasedate = NULL, *duedate = NULL;
     int *mandatory = NULL;
     double *objective = NULL;
@@ -78,6 +80,7 @@ int load_npv( char *fname,
         duedate = new int[njobs];
         mandatory = new int[njobs];
         objective = new double[njobs];
+	    std::vector<std::vector<int>> segper;
 
 Comparación entre C y Java
 Generalidades
@@ -127,6 +130,18 @@ En Java existe la clase predefinida String con métodos bien definidos.
                 file >> lag[j][s];
             }
         }
+
+        //Se generan subconjuntos de periodos de tiempo de 3 tiempos consecutivos
+    	for(int i = 0; i < tmax-2; i++)
+        {
+            int h =0;
+            for(int k=i;k<i+3;k++)
+            {
+                k >> segper[i][h];
+                h++;
+            }
+
+        }
     }
     catch(IloException& e)
     {
@@ -149,6 +164,7 @@ En Java existe la clase predefinida String con métodos bien definidos.
     *prhs = rhs;
     *pin_sched = in_sched;
 	*pin_ubound = in_ubound;
+    *psegper = segper;
 
     return 0;
 
@@ -354,6 +370,7 @@ int rcpsp_cp(
     double *profit,       // profit[j] profit of job j
 	double **tprofit,     // tprofit[j][t] profit of job j starting in time t
     int *nsucc,           // nsucc[j] number of successors of job j
+	int *segper,          // SUBCJTOS DE PERIODOS
     int **succ,           // succ[j][i] is the i-th successor of j
     int **lag,            // lag[j][i] is the lag of job j's i-th successor arc (we assume it is of type end-start)
     int tmax,             // number of time periods
@@ -370,6 +387,7 @@ int rcpsp_cp(
 	double ExtractionTimeLimit,
 	double CpTimeLimit,
 	double GapLimit,
+    std::vector<std::vector<int>> &segper,
 	int numWorkers)
 {
     IloEnv env;
@@ -423,7 +441,8 @@ int rcpsp_cp(
         profit,       
 	    tprofit,     
         nsucc,           
-        succ,           
+        succ, 
+        segper,           
         lag,            
         tmax,             
         nresources,       
@@ -544,9 +563,9 @@ int rcpsp_cp(
 			{
 				IloExpr pexp;
 				if(obj_type == 2)
-					pexp = profit[j] / IloPower(1.0 + discount_rate, IloEndOf(task_variables[j]));
+					pexp = profit[j]*IloPower(2.7,-discount_rate*IloEndOf(task_variables[j]));
 				else
-					pexp = profit[j] / IloPower(1.0 + discount_rate, IloStartOf(task_variables[j]));
+					pexp = profit[j]*IloPower(2.7,-discount_rate*IloStartOf(task_variables[j]));
 				profitsExpr[j] = pexp*IloPresenceOf(env,task_variables[j]);
 			}
 			IloObjective objective = IloMaximize(env,IloSum(profitsExpr)); //en este caso se maximiza el profit
