@@ -15,7 +15,7 @@ int: maxt; % maximum time
 set of int: TIME = 0..maxt;
 %--------------------------------------------------------------
 
-array[TASK] of int: prof; %PROFIT
+array[TASK] of float: prof; %PROFIT
 float: dr; %DISCOUNT RATE
 %%array[TASK] of var float: forall (j in TASK) (v = exp(-dr*s[j])); %auxiliar
 %--------------------------------------------------------------
@@ -29,5 +29,5 @@ constraint forall(r in RESOURCE)
                  (cumulative(s,d,[res[r,t]|t in TASK],L[r]));
 %constraint forall(j in TASK) (s[j]<=maxt-d[j]);
 %var float: obj = sum (j in TASK) (exp(-dr*s[j])*prof[j]);
-solve maximize sum (j in TASK) (s[j]*prof[j]);
+solve maximize sum (j in TASK) (prof[j]/pow(1+dr,s[j]));
 output ["uwu",show(s)];
