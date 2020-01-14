@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/benjaajf/CPscheduler/build/Release/src",
+  "command": "/usr/bin/c++  -DBZ_STATS=0 -DCPSCHEDULER_LINUX -DIL_STD -DLAG_PRECEDENCES=0 -DLOG_RED_LP=0 -DPP_USE_SCALING=0 -I/home/benjaajf/CPscheduler/include -I/opt/ibm/ILOG/CPLEX_Studio1210/cplex/include -I/opt/ibm/ILOG/CPLEX_Studio1210/concert/include -I/opt/ibm/ILOG/CPLEX_Studio1210/cpoptimizer/include   -fmax-errors=1 -Wall -pedantic -Wextra -march=native -std=c++0x -O3 -DNDEBUG -s   -o CMakeFiles/CPSCHEDULER.dir/cp_rcpsp.cpp.o -c /home/benjaajf/CPscheduler/src/cp_rcpsp.cpp",
+  "file": "/home/benjaajf/CPscheduler/src/cp_rcpsp.cpp"
+},
+{
+  "directory": "/home/benjaajf/CPscheduler/build/Release/src",
+  "command": "/usr/bin/c++  -DBZ_STATS=0 -DCPSCHEDULER_LINUX -DIL_STD -DLAG_PRECEDENCES=0 -DLOG_RED_LP=0 -DPP_USE_SCALING=0 -I/home/benjaajf/CPscheduler/include -I/opt/ibm/ILOG/CPLEX_Studio1210/cplex/include -I/opt/ibm/ILOG/CPLEX_Studio1210/concert/include -I/opt/ibm/ILOG/CPLEX_Studio1210/cpoptimizer/include   -fmax-errors=1 -Wall -pedantic -Wextra -march=native -std=c++0x -O3 -DNDEBUG -s   -o CMakeFiles/CPSCHEDULER.dir/main.cpp.o -c /home/benjaajf/CPscheduler/src/main.cpp",
+  "file": "/home/benjaajf/CPscheduler/src/main.cpp"
+}
+]

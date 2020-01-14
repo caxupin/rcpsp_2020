@@ -1,0 +1,93 @@
+Performing C SOURCE FILE Test C_HAS_FERROR_LIMIT failed with the following output:
+Change Dir: /home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_96f0b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_96f0b.dir/build.make CMakeFiles/cmTC_96f0b.dir/build
+make[1]: Entering directory '/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_96f0b.dir/src.c.o
+/usr/bin/cc   -std=c99 -std=gnu99 -DC_HAS_FERROR_LIMIT   -ferror-limit=1 -o CMakeFiles/cmTC_96f0b.dir/src.c.o   -c /home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command line option '-ferror-limit=1'; did you mean '-finline-limit='?
+CMakeFiles/cmTC_96f0b.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_96f0b.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_96f0b.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_96f0b/fast' failed
+make: *** [cmTC_96f0b/fast] Error 2
+
+Source file was:
+int main(void) { return 0; }
+Performing C++ SOURCE FILE Test CXX_HAS_FERROR_LIMIT failed with the following output:
+Change Dir: /home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_14ecd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_14ecd.dir/build.make CMakeFiles/cmTC_14ecd.dir/build
+make[1]: Entering directory '/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_14ecd.dir/src.cxx.o
+/usr/bin/c++    -DCXX_HAS_FERROR_LIMIT   -ferror-limit=1 -o CMakeFiles/cmTC_14ecd.dir/src.cxx.o -c /home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-ferror-limit=1'; did you mean '-finline-limit='?
+CMakeFiles/cmTC_14ecd.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_14ecd.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_14ecd.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_14ecd/fast' failed
+make: *** [cmTC_14ecd/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5be79/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5be79.dir/build.make CMakeFiles/cmTC_5be79.dir/build
+make[1]: se entra en el directorio '/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5be79.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=c99 -std=gnu99 -fmax-errors=1 -Wall -pedantic -Wextra -march=native    -o CMakeFiles/cmTC_5be79.dir/CheckSymbolExists.c.o   -c /home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:11: warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+   return ((int*)(&pthread_create))[argc];
+           ^
+Linking C executable cmTC_5be79
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5be79.dir/link.txt --verbose=1
+/usr/bin/cc  -std=c99 -std=gnu99 -fmax-errors=1 -Wall -pedantic -Wextra -march=native     -rdynamic CMakeFiles/cmTC_5be79.dir/CheckSymbolExists.c.o  -o cmTC_5be79 
+CMakeFiles/cmTC_5be79.dir/CheckSymbolExists.c.o: En la función `main':
+CheckSymbolExists.c:(.text+0x1b): referencia a `pthread_create' sin definir
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5be79.dir/build.make:97: recipe for target 'cmTC_5be79' failed
+make[1]: *** [cmTC_5be79] Error 1
+make[1]: se sale del directorio '/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5be79/fast' failed
+make: *** [cmTC_5be79/fast] Error 2
+
+File /home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_62d33/fast"
+/usr/bin/make -f CMakeFiles/cmTC_62d33.dir/build.make CMakeFiles/cmTC_62d33.dir/build
+make[1]: se entra en el directorio '/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_62d33.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -std=c99 -std=gnu99 -fmax-errors=1 -Wall -pedantic -Wextra -march=native -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_62d33.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_62d33
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62d33.dir/link.txt --verbose=1
+/usr/bin/cc  -std=c99 -std=gnu99 -fmax-errors=1 -Wall -pedantic -Wextra -march=native -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_62d33.dir/CheckFunctionExists.c.o  -o cmTC_62d33 -lpthreads 
+/usr/bin/ld: no se puede encontrar -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_62d33.dir/build.make:97: recipe for target 'cmTC_62d33' failed
+make[1]: *** [cmTC_62d33] Error 1
+make[1]: se sale del directorio '/home/benjaajf/CPscheduler/build/Release/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_62d33/fast' failed
+make: *** [cmTC_62d33/fast] Error 2
+
+
